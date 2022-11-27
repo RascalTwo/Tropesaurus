@@ -1,0 +1,11 @@
+<%- include('partials/header.ejs') %>
+<div class="w-11/12 m-auto text-center shadow-2xl card bg-base-100">
+	<div class="card-body">
+	<div class="flex flex-wrap gap-2 justify-evenly">
+		<% for (const work of works) { %>
+			<a href="/work/<%= work._id %>" class="badge badge-lg bg-blue-900/30 visited:bg-violet-900"><%= work.title %></a>
+		<% } %>
+		</div>
+	</div>
+</div>
+<%- include('partials/footer.ejs') %>

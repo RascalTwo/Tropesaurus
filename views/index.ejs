@@ -1,0 +1,90 @@
+<%- include('partials/header.ejs') %>
+	<div class="grid grid-cols-1 gap-2 pt-5 lg:grid-cols-2">
+		<form action="/list-tropes" class="card w-96 bg-neutral text-neutral-content m-auto h-full">
+			<fieldset class="card-body items-center text-center border h-full border-solid border-gray-300 m-3 mt-0 rounded-lg">
+				<legend class="card-title m-auto px-2">View Work</legend>
+				<p>View the tropes of a work!</p>
+				<select id="workID" name="workID" autocomplete="off" required>
+					<option value="">Select a work</option>
+					<% for (const work of works) { %>
+						<option value="<%= work.id %>"><%= work.title %></option>
+					<% } %>
+				</select>
+				<button class="btn btn-primary">List</button>
+			</fieldset>
+			<script>
+				new TomSelect('#workID', {});
+			</script>
+		</form>
+
+		<form action="/search" class="card w-96 bg-neutral text-neutral-content m-auto h-full">
+			<fieldset class="card-body items-center text-center border h-full border-solid border-gray-300 m-3 rounded-lg">
+				<legend class="card-title m-auto px-2">Filter</legend>
+				<p>Show works only with/without the tropes you choose!</p>
+				<div class="flex gap-2">
+					<select id="mustHave" name="mustHave[]" multiple autocomplete="off">
+						<option value="">Must-Have trope(s)</option>
+						<% for (const trope of tropes) { %>
+							<option value="<%= trope.id %>"><%= trope.name %> (<%= trope.workCount %>)</option>
+						<% } %>
+					</select>
+					<select id="canNotHave" name="canNotHave[]" multiple autocomplete="off">
+						<option value="">Can Not Have trope(s)</option>
+						<% for (const trope of tropes) { %>
+							<option value="<%= trope.id %>"><%= trope.name %> (<%= trope.workCount %>)</option>
+						<% } %>
+					</select>
+				</div>
+				<button class="btn btn-primary">Search</button>
+			</fieldset>
+			<script>
+				new TomSelect('#mustHave', {});
+				new TomSelect('#canNotHave', {});
+			</script>
+		</form>
+
+		<form action="/compare-tropes" class="card w-96 bg-neutral text-neutral-content m-auto h-full">
+			<fieldset class="card-body items-center text-center border h-full border-solid border-gray-300 m-3 rounded-lg">
+				<legend class="card-title m-auto px-2">Compare Works</legend>
+				<p>See the differences in tropes between works!</p>
+				<div class="flex gap-2">
+					<select id="first" name="first" autocomplete="off" required>
+						<option value="">Select first work</option>
+						<% for (const work of works) { %>
+							<option value="<%= work.id %>"><%= work.title %></option>
+						<% } %>
+					</select>
+					<select id="second" name="second" autocomplete="off" required>
+						<option value="">Select second work</option>
+						<% for (const work of works) { %>
+							<option value="<%= work.id %>"><%= work.title %></option>
+						<% } %>
+					</select>
+				</div>
+				<button class="btn btn-primary">Compare</button>
+			</fieldset>
+			<script>
+				new TomSelect('#first', {});
+				new TomSelect('#second', {});
+			</script>
+		</form>
+
+		<form action="/similar-works" class="card w-96 bg-neutral text-neutral-content m-auto h-full">
+			<fieldset class="card-body items-center text-center border h-full border-solid border-gray-300 m-3 rounded-lg">
+				<legend class="card-title m-auto px-2">Find similar works</legend>
+				<p>Find works that share the same tropes!</p>
+				<select id="workID2" name="workID" autocomplete="off" required>
+					<option value="">Select a work</option>
+					<% for (const work of works) { %>
+						<option value="<%= work.id %>"><%= work.title %></option>
+					<% } %>
+				</select>
+				<button class="btn btn-primary">Find Similar</button>
+			</fieldset>
+			<script>
+				new TomSelect('#workID2', {});
+			</script>
+		</form>
+
+	</div>
+<%- include('partials/footer.ejs') %>

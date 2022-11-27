@@ -1,0 +1,12 @@
+<%- include('partials/header.ejs') %>
+<div class="w-11/12 m-auto text-center shadow-2xl card bg-base-100">
+	<div class="card-body">
+	<h1 class="text-2xl">Works similar to <a href="/work/<%= work.id %>" class="text-blue-500 underline visited:text-violet-500 underline-offset-2 hover:underline-offset-auto"><%= work.title %></a></h1>
+	<ul class="flex flex-col gap-1">
+		<% for (const work of similar) { %>
+			<li><a href="/work/<%= work._id %>" class="badge badge-lg bg-blue-900/30 visited:bg-violet-900"><%= work.title %> (<%= work.similarity %>)</a></li>
+		<% } %>
+	</ul>
+	</div>
+</div>
+<%- include('partials/footer.ejs') %>

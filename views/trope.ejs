@@ -1,0 +1,28 @@
+<%- include('partials/header.ejs') %>
+
+<div class="card w-11/12 bg-base-100 shadow-2xl m-auto text-center">
+	<div class="card-body">
+		<h2><a class="text-2xl text-blue-500 visited:text-violet-500 underline underline-offset-2 hover:underline-offset-auto" href="https://tvtropes.org/pmwiki/pmwiki.php/Main/<%= trope.id %>"><%= trope.name %></a></h2>
+		<div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+			<div class="collapse">
+				<input type="checkbox" />
+				<div class="collapse-title text-xl font-medium">
+					Read More...
+				</div>
+				<div class="collapse-content">
+					<div class="mockup-window border bg-base-300">
+						<div class=""><iframe src="https://tvtropes.org/pmwiki/pmwiki.php/Main/<%= trope.id %>" class="w-full h-[75vh] m-auto"></iframe></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h2>Works (<%= trope.works.length %>)</h2>
+		<div class="flex flex-wrap gap-2 justify-evenly">
+			<% for (const work of trope.works) { %>
+				<a href="/work/<%= work.id %>" class="badge badge-lg bg-blue-900/30 visited:bg-violet-900"><%= work.title %></a>
+			<% } %>
+		</div>
+	</div>
+</div>
+
+<%- include('partials/footer.ejs') %>

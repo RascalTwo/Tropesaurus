@@ -1,0 +1,30 @@
+<%- include('partials/header.ejs') %>
+<div class="w-11/12 m-auto text-center shadow-2xl card bg-base-100">
+	<div class="card-body">
+		<div class="overflow-x-auto overflow-y-hidden h-[75vh] m-auto">
+			<table class="table w-full table-zebra">
+				<thead>
+					<tr class="text-center ">
+						<th><a class="text-blue-500 underline visited:text-violet-500 underline-offset-2 hover:underline-offset-auto" href="https://tvtropes.org/pmwiki/pmwiki.php/<%= first.id %>"><%= first.title %></a> (<%= tropes.first.length %>)</th>
+						<th>Both (<%= tropes.both.length %>)</th>
+						<th><a class="text-blue-500 underline visited:text-violet-500 underline-offset-2 hover:underline-offset-auto" href="https://tvtropes.org/pmwiki/pmwiki.php/<%= second.id %>"><%= second.title %></a> (<%= tropes.second.length %>)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for (let i = 0, end = Math.max(...Object.values(tropes).map(arr => arr.length)); i < end; i++) { %>
+						<tr>
+							<% for (const [c, [key, value]] of Object.entries(tropes).entries()) { %>
+								<td <% if (c !== 2) { %> class="border-r-2 border-dotted border-r-gray-400/<%= i % 2 ? 25 : 50 %>" <% } %>>
+									<% if (value[i]) { %>
+										<a href="/trope/<%= value[i].id %>" class="badge badge-lg bg-blue-900/30 visited:bg-violet-900"><%= value[i].name %></a>
+									<% } %>
+								</td>
+							<% } %>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<%- include('partials/footer.ejs') %>
